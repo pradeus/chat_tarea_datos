@@ -22,7 +22,7 @@ public Client(String IP_APP, int PUERTO_APP){
     IP=IP_APP;
 }
 
-//esto es una sobrecarga
+//esta funcion actualiza el puerto y la ip en caso de ser necesario
 public void Update_Data(String IP_APP, int PUERTO_APP){
     Puerto=PUERTO_APP;
     IP=IP_APP;
@@ -31,16 +31,16 @@ public void Update_Data(String IP_APP, int PUERTO_APP){
 //funcion encargada de tirarle el mensaje al socket output
 public void enviar_mensaje(String nombre, String texto) throws IOException{
     try{
-        try (Socket cliente = new Socket(IP,Puerto)) {
+        try (Socket cliente = new Socket(IP,Puerto)) {//se crea el socket tipo cliente
             DataOutputStream mensaje_saliente = new DataOutputStream(cliente.getOutputStream());
-            mensaje_saliente.writeUTF(compresor(nombre,texto));
+            mensaje_saliente.writeUTF(compresor(nombre,texto));//se manda a compresor
         }
         
     }catch(IOException e){
         System.out.println("F por el cliente");
     }
     }
-//esto es una abstraccion, un compresor lo interpreto como una maquina que comprimira el mensaje previo a ser enviado
+//esto es una funcion que junta el nombre con el mensaje en un string separado por este elemento °
 public String compresor(String nombre, String texto){
     mensaje = nombre+"°"+texto;
         return mensaje; 
